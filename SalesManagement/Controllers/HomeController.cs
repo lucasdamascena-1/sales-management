@@ -6,8 +6,35 @@ namespace SalesManagement.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        public IActionResult Menu()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(LoginModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isValidLogin = loginModel.ValidarLogin();
+
+                if (isValidLogin)
+                {
+                    return RedirectToAction("Menu", "Home");
+                }
+                else
+                {
+                    TempData["ErrorLogin"] = "Email ou Senha Inválidos";
+                }
+
+            }
+            
             return View();
         }
 

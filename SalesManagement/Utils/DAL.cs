@@ -9,7 +9,7 @@ namespace SalesManagement.Utils
         private static string Server = "localhost";
         private static string Database = "sistema_venda";
         private static string User = "root";
-        private static string Password = "";
+        private static string Password = "lucasg";
         private static string ConnectionString = $"Server={Server};Database={Database};Uid={User};Pwd={Password};";
         private static MySqlConnection Connection;
 
