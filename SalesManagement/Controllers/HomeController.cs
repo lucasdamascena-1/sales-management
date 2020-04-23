@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SalesManagement.Models;
 using System.Diagnostics;
 
@@ -13,8 +14,16 @@ namespace SalesManagement.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(int? id)
         {
+            if(id != null)
+            {
+                if(id == 0)
+                {
+                    HttpContext.Session.SetString("IdUsuarioLogado", string.Empty);
+                    HttpContext.Session.SetString("NomeUsuarioLogado", string.Empty);
+                }
+            }
             return View();
         }
         [HttpPost]
@@ -26,6 +35,8 @@ namespace SalesManagement.Controllers
 
                 if (isValidLogin)
                 {
+                    HttpContext.Session.SetString("IdUsuarioLogado", loginModel.Id);
+                    HttpContext.Session.SetString("NomeUsuarioLogado", loginModel.Nome);
                     return RedirectToAction("Menu", "Home");
                 }
                 else
@@ -34,7 +45,7 @@ namespace SalesManagement.Controllers
                 }
 
             }
-            
+
             return View();
         }
 

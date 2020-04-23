@@ -6,6 +6,10 @@ namespace SalesManagement.Models
 {
     public class LoginModel
     {
+        public string Id { get; set; }
+
+        public string Nome { get; set; }
+
         [Required(ErrorMessage = "Informe o e-mail do usuário!")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Formato incorreto!")]
@@ -18,12 +22,14 @@ namespace SalesManagement.Models
         //Estou utilizando apenas como um simples teste.
         public bool ValidarLogin()
         {
-            string sql = $"SELECT ID FROM VENDEDOR WHERE EMAIL='{Email}' AND SENHA= {Senha}";
+            string sql = $"SELECT ID, NOME FROM VENDEDOR WHERE EMAIL='{Email}' AND SENHA= {Senha}";
             DAL objDAL = new DAL();
             DataTable dataTable = objDAL.RetDataTable(sql);
 
             if (dataTable.Rows.Count == 1)
             {
+                Id = dataTable.Rows[0]["ID"].ToString();
+                Nome = dataTable.Rows[0]["NOME"].ToString();
                 return true;
             }
 

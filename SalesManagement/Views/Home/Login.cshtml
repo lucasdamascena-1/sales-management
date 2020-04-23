@@ -1,4 +1,12 @@
 ﻿@model LoginModel
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
 <style type="text/css">
     .login-form {
         width: 385px;
@@ -67,16 +75,18 @@
         }
 </style>
 
+
 <div class="login-form">
     <form asp-controller="Home" asp-action="Login" method="post">
         <h2 class="text-center">Sistema de Vendas</h2>
 
-        @{  try
+        @{ try
             {
                 var erro = TempData["ErrorLogin"];
-                <h5 class="text-danger" style="text-align:center">@erro</h5> 
-        
-            }catch
+                <h5 class="text-danger" style="text-align:center">@erro</h5>
+
+            }
+            catch
             {
             }
         }
@@ -106,3 +116,6 @@
     </form>
     <p class="text-center text-muted small">Não tem uma conta? <a href="#">Crie Aqui!</a></p>
 </div>
+
+
+
